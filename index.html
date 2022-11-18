@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Pokemondle</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/template_styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <img src="assets/pokemondle_logo.png">
+        <br>
+        <br>
+        <p class="view"><a href="http://github.com/orderedlist/minimal">View the Project on GitHub <small>orderedlist/minimal</small></a></p>
+        <input type="text" id="pokemon_input" class="searchbox" placeholder="Guess a Pokemon..." value="BULBASAUR">
+        <button type="button" id="submit_button" onclick="searchbox()">Submit</button>
+      </header>
+      <section>
+        <table id="pokemon_table">
+          <tr>
+            <th>Name</th>
+            <th>Pokedex Number</th>
+            <th>Type 1</th>
+            <th>Type 2</th>
+            <th>Height</th>
+            <th>Weight</th>
+            <th>Generation</th>
+            <th>Total Stats</th>
+          </tr>
+        </table>
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script type="module" src="javascripts/script_imports.js"></script>
+    <script type="module" src="javascripts/scripts.js"></script>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>

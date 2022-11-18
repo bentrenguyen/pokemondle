@@ -1,0 +1,28 @@
+.less_than {
+    color: blue;
+}
+
+.greater_than {
+    color: orange;
+}
+
+.type_match {
+    color: green;
+}
+
+.type_no_match {
+    color: red;
+}
+
+.equal_to {
+    color: green;
+}
+
+.slideup {
+    animation: slideup 0.5s;
+}
+
+@keyframes slideup {
+    0% {transform: translateY(1em);}
+    100% {transform: translateY(0);}
+}
