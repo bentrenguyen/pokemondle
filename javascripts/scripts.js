@@ -72,7 +72,6 @@ function generate_class_diff(i, filter_val, cell) {
   }
 }
 
-
 // Execute a function when the user presses a key on the keyboard
 input.addEventListener("keypress", function(event) {
     // If the user presses the "Enter" key on the keyboard
@@ -83,3 +82,5 @@ input.addEventListener("keypress", function(event) {
       document.getElementById("submit_button").click();
     }
   });
+
+// TODO: ERROR on misspelling, ERROR on duplicate submission, success alert, images, hints (weak to?), reset button, random button, cull whitespace on submit, 
