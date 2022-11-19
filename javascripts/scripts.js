@@ -9,16 +9,32 @@ function generate_answers_info(answers) {
 
 var answers_info = generate_answers_info(answers);
 
-var table = document.getElementById("pokemon_table");
+var table = document.getElementById("pokemon_table_body");
 var input = document.getElementById("pokemon_input");
 
 var columns = ['name', 'pokedex_number', 'type1', 'type2', 'height', 'weight', 'generation', 'total_stats']
 
-export function searchbox() {
-    var filter = input.value.toUpperCase();
-    if (pokedex[filter]) {
+var already_submitted = [];
+
+export function searchbox(use_box = true, val) {
+    if (!use_box) {
+      filter = val;
+    } else {
+      var filter = input.value.toUpperCase().trim();
+    }
+
+    if (already_submitted.includes(filter)) {
+      document.getElementById('input_error').innerHTML = "Pokemon already submitted";
+    } else if (pokedex[filter]) {
+      // Clear Error
+      document.getElementById('input_error').innerHTML = '';
+
+      // Add to already_submitted
+      already_submitted += filter;
+
       var row = table.insertRow(-1);
       row.classList.add('slideup');
+      row.classList.add('submission');
       
       var name_cell = row.insertCell(-1);
       var name_text = document.createTextNode(filter);
@@ -37,6 +53,7 @@ export function searchbox() {
       }
     } else {
       // ERROR: No Pokemon found
+      document.getElementById("input_error").innerHTML = "Pokemon not found";
     }
 
 }
@@ -72,6 +89,19 @@ function generate_class_diff(i, filter_val, cell) {
   }
 }
 
+export function reset() {
+  document.getElementById("pokemon_table_body").innerHTML = "";
+  already_submitted = [];
+  document.getElementById("input_error").innerHTML = "";
+}
+
+export function random() {
+  var num_pokemon = Object.keys(pokedex).length;
+  var random_num = Math.floor(Math.random() * num_pokemon);
+  var random_pokemon = Object.keys(pokedex)[random_num];
+  searchbox(false, random_pokemon);
+}
+
 // Execute a function when the user presses a key on the keyboard
 input.addEventListener("keypress", function(event) {
     // If the user presses the "Enter" key on the keyboard
@@ -84,3 +114,15 @@ input.addEventListener("keypress", function(event) {
   });
 
 // TODO: ERROR on misspelling, ERROR on duplicate submission, success alert, images, hints (weak to?), reset button, random button, cull whitespace on submit, 
+
+var date_start = 19314;
+
+function date_check() {
+  const minute = 1000 * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+  
+  var days_counter = Math.round(Date.now()/day) - date_start;
+}
+
+date_check();
