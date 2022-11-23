@@ -20,13 +20,19 @@
         <br>
         <br>
         <p class="view"><a href="http://github.com/orderedlist/minimal">View the Project on GitHub <small>orderedlist/minimal</small></a></p>
-        <input type="text" id="pokemon_input" class="searchbox" placeholder="Guess a Pokemon..." value="BULBASAUR">
-        <button type="button" id="submit_button" onclick="searchbox(true, '')">Submit</button>
-        <p id="input_error"></p>
 
         <button type="button" id="reset_button" onclick="reset()">Reset</button>
 
         <button type="button" id="random_button" onclick="random()">Random</button>
+
+        <input type="text" id="pokemon_input" class="searchbox" placeholder="Guess a Pokemon..." value="BULBASAUR">
+        <button type="button" id="submit_button" onkeyup="filter_searchbox()" onclick="searchbox(true, '')">Submit</button>
+        <p id="input_error"></p>
+        <ul id="pokemon_list" class="hidden">
+
+        </ul>
+
+
       </header>
       <section>
         <table id="pokemon_table">

@@ -26,3 +26,7 @@
     0% {transform: translateY(1em);}
     100% {transform: translateY(0);}
 }
+
+.pokemon_list_item {
+    list-style: none;
+}

@@ -4,6 +4,7 @@ var answers = ['MANKEY'];
 
 function generate_answers_info(answers) {
   // REDO with date changes
+  // return pokedex[answers[date_check()]];
   return pokedex[answers[0]];
 }
 
@@ -123,6 +124,33 @@ function date_check() {
   const day = hour * 24;
   
   var days_counter = Math.round(Date.now()/day) - date_start;
+  return days_counter;
 }
 
-date_check();
+export function filter_searchbox() {
+  var input, filter, i;
+  input = document.getElementById("pokemon_input");
+  filter = input.value.toUpperCase();
+  pokemon_names = Object.keys(pokedex);
+  for (i = 0; i < pokemon_names.length; i++) {
+    txtValue = pokemon_names[i];
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      pokemon_names[i].style.display = "";
+    } else {
+      pokemon_names[i].style.display = "none";
+    }
+  }
+}
+
+function populate_pokemon_list() {
+  var num_pokemon = Object.keys(pokedex).length;
+  var pokemon_list = document.getElementById("pokemon_list");
+  for (var i = 0; i < num_pokemon; i++) {
+    var list_elem = document.createElement('li');
+    list_elem.classList.add('pokemon_list_item');
+    list_elem.appendChild(document.createTextNode(Object.keys(pokedex)[i]));
+    pokemon_list.appendChild(list_elem);
+  }
+}
+
+populate_pokemon_list();
