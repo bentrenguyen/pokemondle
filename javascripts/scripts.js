@@ -52,6 +52,14 @@ export function searchbox(use_box = true, val) {
 
         generate_class_diff(i, pokedex[filter][i], cell);
       }
+
+      // remove from list
+      var list_item_id = filter + "_li";
+      document.getElementById(list_item_id).remove();
+
+      // remove from input box
+      document.getElementById("pokemon_input").value = '';
+
     } else {
       // ERROR: No Pokemon found
       document.getElementById("input_error").innerHTML = "Pokemon not found";
@@ -114,8 +122,6 @@ input.addEventListener("keypress", function(event) {
     }
   });
 
-// TODO: ERROR on misspelling, ERROR on duplicate submission, success alert, images, hints (weak to?), reset button, random button, cull whitespace on submit, 
-
 var date_start = 19314;
 
 function date_check() {
@@ -128,16 +134,21 @@ function date_check() {
 }
 
 export function filter_searchbox() {
-  var input, filter, i;
+  var input, filter, div, li, i, txtValue;
   input = document.getElementById("pokemon_input");
   filter = input.value.toUpperCase();
-  pokemon_names = Object.keys(pokedex);
-  for (i = 0; i < pokemon_names.length; i++) {
-    txtValue = pokemon_names[i];
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      pokemon_names[i].style.display = "";
+  div = document.getElementById("pokemon_list_dropdown");
+  li = div.getElementsByTagName("li");
+
+  for (i = 0; i < li.length; i++) {
+    txtValue = li[i].textContent || li[i].innerText;
+    if (filter.length > 0 && txtValue.toUpperCase().indexOf(filter) > -1) {
+      var dropdowns = document.getElementById("pokemon_list");
+      dropdowns.style.display = "block";
+      li[i].style.display = "block";
     } else {
-      pokemon_names[i].style.display = "none";
+      li[i].style.display = "none";
+
     }
   }
 }
@@ -146,11 +157,36 @@ function populate_pokemon_list() {
   var num_pokemon = Object.keys(pokedex).length;
   var pokemon_list = document.getElementById("pokemon_list");
   for (var i = 0; i < num_pokemon; i++) {
+    var curr_pokemon = Object.keys(pokedex)[i];
     var list_elem = document.createElement('li');
     list_elem.classList.add('pokemon_list_item');
-    list_elem.appendChild(document.createTextNode(Object.keys(pokedex)[i]));
+    var pokemon_list_id = curr_pokemon + "_li";
+    list_elem.id = pokemon_list_id;
+    list_elem.style.display = "none";
+    list_elem.appendChild(document.createTextNode(curr_pokemon));
     pokemon_list.appendChild(list_elem);
   }
 }
 
 populate_pokemon_list();
+
+
+window.onclick = function(event) {
+  // Close the dropdown menu if the user clicks outside of it
+  var dropdowns = document.getElementById("pokemon_list");
+  var input = document.getElementById("pokemon_input");
+  var filter = input.value.toUpperCase();
+  if (!event.target.matches('#pokemon_input')) {
+    if (dropdowns.style.display!='none' && !document.activeElement.matches('#pokemon_input')) {
+      dropdowns.style.display = "none";
+    } 
+  } else if (filter.length > 0){
+    dropdowns.style.display = "block";
+  }
+
+  // Selected pokemon from dropdown
+  if (event.target.matches('.pokemon_list_item')) {
+    var selected_pokemon = event.target.innerHTML;
+    document.getElementById("pokemon_input").value = selected_pokemon;
+  }
+}

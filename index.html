@@ -24,13 +24,17 @@
         <button type="button" id="reset_button" onclick="reset()">Reset</button>
 
         <button type="button" id="random_button" onclick="random()">Random</button>
+        <div class="input_div">
+          <p id="input_error"></p>
+          <input type="text" id="pokemon_input" class="searchbox" placeholder="Guess a Pokemon..." onkeyup="filter_searchbox()">
+          <button type="button" id="submit_button" onclick="searchbox(true, '')">Submit</button>
+          
+        </div>
+        <div id="pokemon_list_dropdown" class="dropdown">
+          <ul id="pokemon_list" class="dropdown_content">
+          </ul>
+        </div>
 
-        <input type="text" id="pokemon_input" class="searchbox" placeholder="Guess a Pokemon..." value="BULBASAUR">
-        <button type="button" id="submit_button" onkeyup="filter_searchbox()" onclick="searchbox(true, '')">Submit</button>
-        <p id="input_error"></p>
-        <ul id="pokemon_list" class="hidden">
-
-        </ul>
 
 
       </header>

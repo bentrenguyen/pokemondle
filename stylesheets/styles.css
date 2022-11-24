@@ -27,6 +27,27 @@
     100% {transform: translateY(0);}
 }
 
-.pokemon_list_item {
+#pokemon_list {
     list-style: none;
+    padding-left: 0;
+    max-height: 15em;
+    overflow: auto;
+}
+
+#pokemon_list_dropdown {
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    width: 17em;
+}
+
+.pokemon_list_item {
+    cursor: pointer;
+}
+
+.pokemon_list_item:hover, .pokemon_list_item:focus {
+    background-color: #ddd;
+}
+
+.input_div:focus-within {
+    display: block;
 }
