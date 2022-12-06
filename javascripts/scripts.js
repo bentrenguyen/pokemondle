@@ -1,6 +1,6 @@
 import pokedex from "../assets/pokemon_data.json" assert { type: "json" };
 
-var answers = ['PUPITAR'];
+var answers = ['MANKEY'];
 
 function generate_answers_info(answers) {
   // REDO with date changes
@@ -84,10 +84,36 @@ export function searchbox(use_box = true, val) {
         //cell.appendChild(text);
         cell.classList.add(columns[i+1]);
 
-        generate_class_diff(i, pokedex[filter][i], cell);
+        var numeric_columns = [0, 3, 4, 5, 6];
+        var answer_val = answers_info[i];
+
+        var filter_val = pokedex[filter][i];
+        
+        if (numeric_columns.includes(i)) {
+          if (filter_val < answer_val) {
+            flip_card_back.classList.add('less_than');
+            var up_arrow = document.createTextNode(' ↑');
+            flip_card_back.appendChild(up_arrow);
+          } else if (filter_val > answer_val) {
+            flip_card_back.classList.add('greater_than');
+            var down_arrow = document.createTextNode(' ↓');
+            flip_card_back.appendChild(down_arrow);
+          } else if (filter_val == answer_val){
+            flip_card_back.classList.add('equal_to');
+          } else {
+            flip_card_back.classList.add('ERROR');
+          }
+        } else {
+          var type_combined_answer = [answers_info[1], answers_info[2]];
+          if (type_combined_answer.includes(filter_val)) {
+            flip_card_back.classList.add('type_match');
+          } else {
+            flip_card_back.classList.add('type_no_match');
+          }
+          
+        }
       }
 
-      console.log(flip_card_inner_ids);
 
       // generate flips and delays
       for (let j = 0; j < flip_card_inner_ids.length; j++) {
@@ -95,7 +121,7 @@ export function searchbox(use_box = true, val) {
           var flip_card_id = flip_card_inner_ids[j];
           var flip_card_inner = document.getElementById(flip_card_id);
           flip_card_inner.classList.add('flip');
-        }, 200*j);
+        }, 300*j);
         
         
       }
@@ -112,37 +138,6 @@ export function searchbox(use_box = true, val) {
       document.getElementById("input_error").innerHTML = "Pokemon not found";
     }
 
-}
-
-function generate_class_diff(i, filter_val, cell) {
-  var numeric_columns = [0, 3, 4, 5, 6];
-  var answer_val = answers_info[i];
-
-
-  if (numeric_columns.includes(i)) {
-    if (filter_val < answer_val) {
-      cell.classList.add('less_than');
-      var up_arrow = document.createTextNode(' ↑');
-      cell.appendChild(up_arrow);
-    } else if (filter_val > answer_val) {
-      cell.classList.add('greater_than');
-      var down_arrow = document.createTextNode(' ↓');
-      cell.appendChild(down_arrow);
-    } else if (filter_val == answer_val){
-      cell.classList.add('equal_to');
-    } else {
-      cell.classList.add('ERROR');
-    }
-  } else {
-    var type_combined_answer = [answers_info[1], answers_info[2]];
-    if (filter_val == "None") {
-    } else if (type_combined_answer.includes(filter_val)) {
-      cell.classList.add('type_match');
-    } else {
-      cell.classList.add('type_no_match');
-    }
-    
-  }
 }
 
 export function reset() {

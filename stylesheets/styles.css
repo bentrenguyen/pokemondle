@@ -1,21 +1,21 @@
 .less_than {
-    color: blue;
+    background-color: blue;
 }
 
 .greater_than {
-    color: orange;
+    background-color: orange;
 }
 
 .type_match {
-    color: green;
+    background-color: green;
 }
 
 .type_no_match {
-    color: red;
+    background-color: red;
 }
 
 .equal_to {
-    color: green;
+    background-color: green;
 }
 
 .slideup {
@@ -103,6 +103,7 @@ button {
     background-color: transparent;
     width: 75px;
     height: 75px;
+    font-size: 1.2em;
   }
   
   /* This container is needed to position the front and back side */
@@ -110,9 +111,11 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
+
+    transition: transform 1.5s;
     transform-style: preserve-3d;
+    
+
 
   }
 
@@ -129,20 +132,20 @@ button {
     backface-visibility: hidden;
   }
   
-  /* Style the front side (fallback if image is missing) */
-  .flip-card-front {
-
-    color: black;
-  }
-  
   /* Style the back side */
   .flip-card-back {
-    background-color: dodgerblue;
     color: white;
     transform: rotateY(180deg);
+    line-height: 75px; 
+    text-align: center;
+    text-shadow: 1px 1px black;
   }
 
 .pokemon_table_column {
     width: 75px;
     text-align: center;
+}
+
+#pokemon_table {
+    border: none;
 }
