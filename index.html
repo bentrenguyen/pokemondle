@@ -17,46 +17,69 @@
     <div class="wrapper">
       <header>
         <img src="assets/pokemondle_logo.png">
-        <br>
-        <br>
-        <p class="view"><a href="http://github.com/orderedlist/minimal">View the Project on GitHub <small>orderedlist/minimal</small></a></p>
+        <div class="header_items">
+          <p class="view"><a href="http://github.com/orderedlist/minimal">View the Project on GitHub <small>orderedlist/minimal</small></a></p>
 
-        <button type="button" id="reset_button" onclick="reset()">Reset</button>
+          <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        </div>
 
-        <button type="button" id="random_button" onclick="random()">Random</button>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1>John Doe</h1>
+              <p>Architect & Engineer</p>
+              <p>We love that guy</p>
+            </div>
+          </div>
+        </div>
+
+      </header>
+      <section>
+
+        
+
         <div class="input_div">
           <p id="input_error"></p>
           <input type="text" id="pokemon_input" class="searchbox" placeholder="Guess a Pokemon..." onkeyup="filter_searchbox()">
           <button type="button" id="submit_button" onclick="searchbox(true, '')">Submit</button>
-          
+
+          <button type="button" id="random_button" onclick="random()">Random</button>
         </div>
+        
         <div id="pokemon_list_dropdown" class="dropdown">
           <ul id="pokemon_list" class="dropdown_content">
           </ul>
         </div>
-
-
-
-      </header>
+      </section>
+      
       <section>
         <table id="pokemon_table">
           <thead>
-            <th>Name</th>
-            <th>Pokedex Number</th>
-            <th>Type 1</th>
-            <th>Type 2</th>
-            <th>Height</th>
-            <th>Weight</th>
-            <th>Generation</th>
-            <th>Total Stats</th>
+            <th class="pokemon_table_column">Name</th>
+            <th class="pokemon_table_column">Pokedex Number</th>
+            <th class="pokemon_table_column">Type 1</th>
+            <th class="pokemon_table_column">Type 2</th>
+            <th class="pokemon_table_column">Height</th>
+            <th class="pokemon_table_column">Weight</th>
+            <th class="pokemon_table_column">Generation</th>
+            <th class="pokemon_table_column">Total Stats</th>
           </thead>
           <tbody id="pokemon_table_body">
 
           </tbody>
         </table>
       </section>
+      <section id="success">
+        <div id="success_box">
+          <h3>Congrats!</h3>
+
+        </div>
+      </section>
       <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+
       </footer>
     </div>
     <script type="module" src="javascripts/script_imports.js"></script>

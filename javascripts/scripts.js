@@ -1,6 +1,6 @@
 import pokedex from "../assets/pokemon_data.json" assert { type: "json" };
 
-var answers = ['MANKEY'];
+var answers = ['PUPITAR'];
 
 function generate_answers_info(answers) {
   // REDO with date changes
@@ -31,10 +31,10 @@ export function searchbox(use_box = true, val) {
       document.getElementById('input_error').innerHTML = '';
 
       // Add to already_submitted
-      already_submitted += filter;
+      already_submitted.push(filter);
 
-      var row = table.insertRow(-1);
-      row.classList.add('slideup');
+      var row = table.insertRow(0);
+      //row.classList.add('slideup');
       row.classList.add('submission');
       
       var name_cell = row.insertCell(-1);
@@ -42,15 +42,62 @@ export function searchbox(use_box = true, val) {
       name_cell.appendChild(name_text);
       name_cell.classList.add('name');
 
-      var type_combined = [pokedex[filter][1], pokedex[filter][2]];
+      // success clause
+      // var answer = answers[date_check()];
+      var answer = answers[0];
+      if (filter == answers[0]) {
+        var success_box = document.getElementById("success_box");
+        success_box.style.display = "block";
+        var num_guesses = already_submitted.length;
+        var success_text = document.createTextNode("You guessed " + answer + " in " + num_guesses + " turns.");
+        success_box.appendChild(success_text);
+      }
+
+      var flip_card_inner_ids = [];
 
       for (let i = 0; i < columns.length-1; i++) {
         var cell = row.insertCell(-1);
+
+
+        var flip_card = document.createElement("div");
+        flip_card.classList.add('flip-card');
+        var flip_card_inner = document.createElement("div");
+        flip_card_inner.classList.add('flip-card-inner');
+        flip_card_inner.id = "flip_card_inner_"+ i;
+        flip_card_inner_ids.push("flip_card_inner_"+ i);
+        flip_card.appendChild(flip_card_inner);
+        var flip_card_front = document.createElement("div");
+        flip_card_front.classList.add('flip-card-front');
+        // insert color of flip_card_front
+        flip_card_inner.appendChild(flip_card_front);
+        var flip_card_back = document.createElement("div");
+        flip_card_back.classList.add('flip-card-back');
+        
+
+
         var text = document.createTextNode(pokedex[filter][i]);
-        cell.appendChild(text);
+        flip_card_back.appendChild(text);
+
+        flip_card_inner.appendChild(flip_card_back);
+
+        cell.appendChild(flip_card);
+        //cell.appendChild(text);
         cell.classList.add(columns[i+1]);
 
         generate_class_diff(i, pokedex[filter][i], cell);
+      }
+
+      console.log(flip_card_inner_ids);
+
+      // generate flips and delays
+      for (let j = 0; j < flip_card_inner_ids.length; j++) {
+        setTimeout(function() {
+          var flip_card_id = flip_card_inner_ids[j];
+          var flip_card_inner = document.getElementById(flip_card_id);
+          flip_card_inner.classList.add('flip');
+        }, 200*j);
+        
+        
       }
 
       // remove from list
