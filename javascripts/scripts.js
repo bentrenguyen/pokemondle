@@ -1,14 +1,14 @@
 import pokedex from "../assets/pokemon_data.json" assert { type: "json" };
-
-var answers = ['MANKEY'];
+import answers from "../assets/pokemon_answers.json" assert { type: "json" };
 
 function generate_answers_info(answers) {
   // REDO with date changes
-  // return pokedex[answers[date_check()]];
-  return pokedex[answers[0]];
+  return pokedex[answers[date_check()]];
+  // return pokedex[answers[0]];
 }
 
 var answers_info = generate_answers_info(answers);
+console.log(answers[19]);
 
 var table = document.getElementById("pokemon_table_body");
 var input = document.getElementById("pokemon_input");
@@ -39,13 +39,14 @@ export function searchbox(use_box = true, val) {
       
       var name_cell = row.insertCell(-1);
       var name_text = document.createTextNode(filter);
+      name_cell.style.textAlign = 'center';
       name_cell.appendChild(name_text);
+      
       name_cell.classList.add('name');
 
       // success clause
-      // var answer = answers[date_check()];
-      var answer = answers[0];
-      if (filter == answers[0]) {
+      var answer = answers[date_check()];
+      if (answer.includes(filter)) {
         var success_box = document.getElementById("success_box");
         success_box.style.display = "block";
         var num_guesses = already_submitted.length;
@@ -164,16 +165,20 @@ input.addEventListener("keypress", function(event) {
     }
   });
 
-var date_start = 19314;
+
 
 function date_check() {
+  var date_start = 19314;
   const minute = 1000 * 60;
   const hour = minute * 60;
   const day = hour * 24;
   
   var days_counter = Math.round(Date.now()/day) - date_start;
+
   return days_counter;
 }
+
+
 
 export function filter_searchbox() {
   var input, filter, div, li, i, txtValue;
